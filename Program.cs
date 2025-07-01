@@ -1,59 +1,31 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using DataManipulationApp.cs;
-
-while (true)
-{
-    Console.WriteLine("Welcome to the DataManipulationApp.");
-    Console.WriteLine("Please select the criterion ('id, 'name', 'city' or 'exit' to close the app) based on which you wish to select the person");
-    string criterion = Console.ReadLine().ToLower();
-
-    if (criterion == "exit")
-    {
-        Console.WriteLine("Thanks for using the app. Have a nice day!");
-        break;
-    }
-
-    switch (criterion)
-    {
-        case "id":
-            Console.WriteLine("Thanks for selecting the id criterion. Please enter the id: ");
-            Console.ReadLine();
-            if(!int.TryParse(Console.ReadLine(), out int id))
-            {
-                Console.WriteLine("Invalid input, try again please");
-
-            }
-            IEnumerable<Person> personsById = Person.PersonRepository.SelectById(id);
-            foreach(Person person in personsById)
-            {
-                Console.WriteLine($"The people with id {id} : " + person.ToString());
-            }
-            break;
-        case "name":
-            Console.WriteLine("Thanks for selecting the name criterion. Please enter the name: ");
-            string name = Console.ReadLine();
-            IEnumerable<Person> personsByName = Person.PersonRepository.SelectByName(name);
-            foreach(Person person in personsByName)
-            {
-                Console.WriteLine($"The people with name {name}: " + person.ToString());
-            }
-            break;
-        case "city":
-            Console.WriteLine("Thanks for selecting the city criterion. Please enter the city: ");
-            string city = Console.ReadLine();
-            IEnumerable<Person> personsByCity = Person.PersonRepository.SelectByCity(city);
-            foreach(Person person in personsByCity)
-            {
-                Console.WriteLine($"The people with city {city}: " + person.ToString());
-            }
-            break;
-        default: Console.WriteLine("Incorrect input. Try again, please.");
-            break;
-    }
-   
-}
+using GenericsTraining.cs;
 
 
+Generic gen = new Generic();
 
+int x = 10;
+int y = 33;
+gen.Swap(ref x, ref y);
+
+string txt1 = "abc";
+string txt2 = "xyz";
+gen.Swap(ref txt1, ref txt2);
+
+//creating a generic instance of typ int of class GenericClass
+GenericClass<int> genericInt = new GenericClass<int>();
+GenericClass<double> genericDouble = new GenericClass<double>();
+
+genericInt.Push(99);
+genericInt.Push(80);
+genericInt.Push(100);
+int popInt = genericInt.Pop();
+Console.WriteLine(popInt.ToString());
+
+genericDouble.Push(101.05);
+genericDouble.Push(102.05);
+genericDouble.Push(103.05);
+double popDouble = genericDouble.Pop();
+Console.WriteLine(popDouble.ToString());
 
 
